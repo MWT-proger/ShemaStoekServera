@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Схема серверных стоек</title>
+    <link rel="stylesheet" href="styles_index.css">
+</head>
+
+<body>
+    <!-- Хедер -->
+    <header>
+        <button class="back-button" onclick="window.location.href='admin.html'">Админка</button>
+        <h1>Схема серверных стоек</h1>
+    </header>
+
+    <!-- Контейнер сетки -->
+    <div class="grid-container">
+        <!-- Пример сетки 6x5 -->
+        <div class="grid-cell" oncontextmenu="showContextMenu(event, 'rack1')">
+            <div class="rack">
+                <div class="rack-title">Стойка 1</div>
+                <div class="rack-subtitle">Основная</div>
+            </div>
+        </div>
+        <div class="grid-cell empty"></div>
+        <div class="grid-cell" oncontextmenu="showContextMenu(event, 'rack2')">
+            <div class="rack">
+                <div class="rack-title">Стойка 2</div>
+                <div class="rack-subtitle">Резервная</div>
+            </div>
+        </div>
+        <div class="grid-cell empty"></div>
+        <div class="grid-cell" oncontextmenu="showContextMenu(event, 'rack3')">
+            <div class="rack">
+                <div class="rack-title">Стойка 3</div>
+                <div class="rack-subtitle">Хранение</div>
+            </div>
+        </div>
+        <div class="grid-cell empty"></div>
+        <div class="grid-cell" oncontextmenu="showContextMenu(event, 'rack4')">
+            <div class="rack">
+                <div class="rack-title">Стойка 4</div>
+                <div class="rack-subtitle">Сеть</div>
+            </div>
+        </div>
+        <div class="grid-cell empty"></div>
+        <div class="grid-cell" oncontextmenu="showContextMenu(event, 'rack5')">
+            <div class="rack">
+                <div class="rack-title">Стойка 5</div>
+                <div class="rack-subtitle">Резервная</div>
+            </div>
+        </div>
+        <div class="grid-cell empty"></div>
+        <div class="grid-cell" oncontextmenu="showContextMenu(event, 'rack6')">
+            <div class="rack">
+                <div class="rack-title">Стойка 6</div>
+                <div class="rack-subtitle">Основная</div>
+            </div>
+        </div>
+        <div class="grid-cell empty"></div>
+        <div class="grid-cell" oncontextmenu="showContextMenu(event, 'rack7')">
+            <div class="rack">
+                <div class="rack-title">Стойка 7</div>
+                <div class="rack-subtitle">Хранение</div>
+            </div>
+        </div>
+        <div class="grid-cell empty"></div>
+        <div class="grid-cell" oncontextmenu="showContextMenu(event, 'rack8')">
+            <div class="rack">
+                <div class="rack-title">Стойка 8</div>
+                <div class="rack-subtitle">Сеть</div>
+            </div>
+        </div>
+        <div class="grid-cell empty"></div>
+        <div class="grid-cell" oncontextmenu="showContextMenu(event, 'rack9')">
+            <div class="rack">
+                <div class="rack-title">Стойка 9</div>
+                <div class="rack-subtitle">Резервная</div>
+            </div>
+        </div>
+        <div class="grid-cell empty"></div>
+        <div class="grid-cell" oncontextmenu="showContextMenu(event, 'rack10')">
+            <div class="rack">
+                <div class="rack-title">Стойка 10</div>
+                <div class="rack-subtitle">Основная</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Контекстное меню -->
+    <div id="contextMenu" class="context-menu">
+        <button onclick="showDescription()">
+            <svg class="icon" viewBox="0 0 24 24">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+            </svg>
+            <span>Описание</span>
+        </button>
+        <button onclick="goToRack()">
+            <svg class="icon" viewBox="0 0 24 24">
+                <path
+                    d="M19 19H5V5h7V3H5c-1.11 0-2 .89-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
+            </svg>
+            <span>Перейти к стойке</span>
+        </button>
+    </div>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title">Заголовок</h2>
+            <div class="modal-scrollable">
+                <div class="modal-section">
+                    <h3>Описание</h3>
+                    <p id="modal-description">Описание элемента.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>IP-адрес</h3>
+                    <p id="modal-ip">192.168.1.1</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Статус</h3>
+                    <p id="modal-status">Активен</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Дополнительно</h3>
+                    <p id="modal-extra">Дополнительная информация.</p>
+                </div>
+                <!-- Добавьте остальные поля (всего 20) -->
+                <div class="modal-section">
+                    <h3>Поле 4</h3>
+                    <p id="modal-field4">Значение поля 4.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Поле 5</h3>
+                    <p id="modal-field5">Значение поля 5.</p>
+                </div>
+                <!-- И так далее до 20 полей -->
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button"
+                    onclick="window.open('http://example.com', '_blank')">Веб-интерфейс</button>
+                <button class="modal-button edit" onclick="editItem()">Редактировать</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showContextMenu(event, rackId) {
+            event.preventDefault();
+            const contextMenu = document.getElementById('contextMenu');
+            contextMenu.style.display = 'block';
+            contextMenu.style.left = `${event.pageX}px`;
+            contextMenu.style.top = `${event.pageY}px`;
+            contextMenu.setAttribute('data-rack-id', rackId);
+        }
+
+        function showDescription() {
+            const rackId = document.getElementById('contextMenu').getAttribute('data-rack-id');
+            openModal(rackId);
+        }
+
+        function goToRack() {
+            const rackId = document.getElementById('contextMenu').getAttribute('data-rack-id');
+            window.location.href = `rack.html?id=${rackId}`;
+        }
+
+        document.addEventListener('click', () => {
+            document.getElementById('contextMenu').style.display = 'none';
+        });
+
+        // Функция для открытия модального окна
+        function openModal(elementId) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const modalIp = document.getElementById('modal-ip');
+            const modalStatus = document.getElementById('modal-status');
+            const modalExtra = document.getElementById('modal-extra');
+            const modalField4 = document.getElementById('modal-field4');
+            const modalField5 = document.getElementById('modal-field5');
+            // Добавьте остальные поля
+
+            // Пример данных для модального окна
+            const elements = {
+                rack1: {
+                    title: "Стойка 1",
+                    description: "Основная стойка для обработки данных.",
+                    ip: "192.168.1.10",
+                    status: "Активен",
+                    extra: "Процессор: Intel Xeon, Память: 64 ГБ",
+                    field4: "Значение поля 4 для стойки 1",
+                    field5: "Значение поля 5 для стойки 1"
+                },
+                rack2: {
+                    title: "Стойка 2",
+                    description: "Резервная стойка для хранения данных.",
+                    ip: "192.168.1.20",
+                    status: "Активен",
+                    extra: "Объем: 100 ТБ, Тип: SSD",
+                    field4: "Значение поля 4 для стойки 2",
+                    field5: "Значение поля 5 для стойки 2"
+                }
+            };
+
+            // Заполнение модального окна данными
+            const element = elements[elementId];
+            modalTitle.textContent = element.title;
+            modalDescription.textContent = element.description;
+            modalIp.textContent = element.ip;
+            modalStatus.textContent = element.status;
+            modalExtra.textContent = element.extra;
+            modalField4.textContent = element.field4;
+            modalField5.textContent = element.field5;
+            // Заполните остальные поля
+
+            // Показ модального окна
+            modal.style.display = "flex";
+        }
+
+        // Функция для закрытия модального окна
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = "none";
+        }
+
+        // Закрытие модального окна при клике вне его
+        window.onclick = function (event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        // Функция для кнопки "Редактировать"
+        function editItem() {
+            alert("Редактирование элемента...");
+        }
+    </script>
+</body>
+
+</html>

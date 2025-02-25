@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Стойка серверов</title>
+    <link rel="stylesheet" href="style_rack.css">
+</head>
+
+<body>
+    <!-- Хедер -->
+    <header>
+        <button class="back-button" onclick="window.location.href='index.html'">← На главную</button>
+        <h1>Стойка №1</h1>
+    </header>
+
+    <!-- Контейнер стойки -->
+    <div class="rack-container">
+        <!-- Элементы стойки (15 элементов, некоторые пустые) -->
+        <div class="rack-item server" onclick="openModal('server1')">
+            <div class="item-title">Сервер 1</div>
+            <div class="item-subtitle">Основной</div>
+        </div>
+        <div class="rack-item empty"></div>
+        <div class="rack-item switch" onclick="openModal('switch1')">
+            <div class="item-title">Коммутатор 1</div>
+            <div class="item-subtitle">Сеть</div>
+        </div>
+        <div class="rack-item empty"></div>
+        <div class="rack-item disk" onclick="openModal('disk1')">
+            <div class="item-title">Полка дисков 1</div>
+            <div class="item-subtitle">Хранение</div>
+        </div>
+        <!-- Добавьте остальные элементы (всего 15) -->
+    </div>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title">Заголовок</h2>
+            <div class="modal-scrollable">
+                <div class="modal-section">
+                    <h3>Описание</h3>
+                    <p id="modal-description">Описание элемента.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>IP-адрес</h3>
+                    <p id="modal-ip">192.168.1.1</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Статус</h3>
+                    <p id="modal-status">Активен</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Дополнительно</h3>
+                    <p id="modal-extra">Дополнительная информация.</p>
+                </div>
+                <!-- Добавьте остальные поля (всего 20) -->
+                <div class="modal-section">
+                    <h3>Поле 4</h3>
+                    <p id="modal-field4">Значение поля 4.</p>
+                </div>
+                <div class="modal-section">
+                    <h3>Поле 5</h3>
+                    <p id="modal-field5">Значение поля 5.</p>
+                </div>
+                <!-- И так далее до 20 полей -->
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button"
+                    onclick="window.open('http://example.com', '_blank')">Веб-интерфейс</button>
+                <button class="modal-button edit" onclick="editItem()">Редактировать</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Функция для открытия модального окна
+        function openModal(elementId) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const modalIp = document.getElementById('modal-ip');
+            const modalStatus = document.getElementById('modal-status');
+            const modalExtra = document.getElementById('modal-extra');
+            const modalField4 = document.getElementById('modal-field4');
+            const modalField5 = document.getElementById('modal-field5');
+            // Добавьте остальные поля
+
+            // Пример данных для модального окна
+            const elements = {
+                server1: {
+                    title: "Сервер 1",
+                    description: "Основной сервер для обработки данных.",
+                    ip: "192.168.1.10",
+                    status: "Активен",
+                    extra: "Процессор: Intel Xeon, Память: 64 ГБ",
+                    field4: "Значение поля 4 для сервера 1",
+                    field5: "Значение поля 5 для сервера 1"
+                },
+                switch1: {
+                    title: "Коммутатор 1",
+                    description: "Сетевой коммутатор для управления трафиком.",
+                    ip: "192.168.1.20",
+                    status: "Активен",
+                    extra: "Порты: 24, Скорость: 1 Гбит/с",
+                    field4: "Значение поля 4 для коммутатора 1",
+                    field5: "Значение поля 5 для коммутатора 1"
+                },
+                disk1: {
+                    title: "Полка дисков 1",
+                    description: "Хранилище данных с высокой производительностью.",
+                    ip: "192.168.1.30",
+                    status: "Активен",
+                    extra: "Объем: 100 ТБ, Тип: SSD",
+                    field4: "Значение поля 4 для полки дисков 1",
+                    field5: "Значение поля 5 для полки дисков 1"
+                }
+            };
+
+            // Заполнение модального окна данными
+            const element = elements[elementId];
+            modalTitle.textContent = element.title;
+            modalDescription.textContent = element.description;
+            modalIp.textContent = element.ip;
+            modalStatus.textContent = element.status;
+            modalExtra.textContent = element.extra;
+            modalField4.textContent = element.field4;
+            modalField5.textContent = element.field5;
+            // Заполните остальные поля
+
+            // Показ модального окна
+            modal.style.display = "flex";
+        }
+
+        // Функция для закрытия модального окна
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = "none";
+        }
+
+        // Закрытие модального окна при клике вне его
+        window.onclick = function (event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        // Функция для кнопки "Редактировать"
+        function editItem() {
+            alert("Редактирование элемента...");
+        }
+    </script>
+</body>
+
+</html>
